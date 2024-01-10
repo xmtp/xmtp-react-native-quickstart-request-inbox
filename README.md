@@ -1,5 +1,7 @@
 # RN Example for IOS
 
+[![Watch the video](link-to-thumbnail-image)](link-to-video)
+
 ### Prerequisites
 
 - Node.js
