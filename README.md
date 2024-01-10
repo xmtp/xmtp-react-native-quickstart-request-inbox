@@ -188,8 +188,6 @@ Ethers.js relies on the Buffer class, which is a global object in Node.js but no
    npm install buffer
    ```
 
-````
-
 2. **Polyfill Buffer:**
 
    In the entry point of your application, such as `index.js`, add Buffer to the global scope:
@@ -197,4 +195,3 @@ Ethers.js relies on the Buffer class, which is a global object in Node.js but no
    ```jsx
    global.Buffer = global.Buffer || require('buffer').Buffer;
    ```
-````
