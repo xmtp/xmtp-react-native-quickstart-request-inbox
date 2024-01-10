@@ -82,6 +82,112 @@ Finally, start your React Native application:
 npm run ios
 ```
 
+### Initialize XMTP Client with Consent
+
+Here's your existing `initXmtpWithKeys` function, updated to include the consent refresh logic.
+
+```jsx
+const initXmtpWithKeys = async function () {
+  // ... previous code
+  const xmtp = await Client.create(wallet);
+  // Add these lines to refresh the consent list
+  await xmtp.contacts.refreshConsentList();
+};
+```
+
+#### Filtering conversations based on consent
+
+Using the `consentState` property of the conversation object, you can filter the conversations based on consent.
+
+```jsx
+const allowed = await Promise.all(
+  conversations.map(async conversation => {
+    const consentState = await conversation.consentState();
+    return consentState === 'allowed' ? conversation : null;
+  }),
+).then(results => results.filter(Boolean));
+
+const requests = await Promise.all(
+  filteredConversations.map(async conversation => {
+    const consentState = await conversation.consentState();
+    return consentState === 'unknown' || consentState === 'denied'
+      ? conversation
+      : null;
+  }),
+).then(results => results.filter(Boolean));
+```
+
+#### Request inbox
+
+You can now create a separate inbox for requests. This inbox will only show the conversations that have not been allowed yet.
+
+```jsx
+{
+  activeTab === 'requests' ? (
+    <TouchableOpacity
+      style={styles.conversationListItem}
+      onPress={() => setActiveTabWithStorage('allowed')}>
+      <Text style={styles.conversationName}>← Allowed</Text>
+    </TouchableOpacity>
+  ) : (
+    <TouchableOpacity
+      style={styles.conversationListItem}
+      onPress={() => setActiveTabWithStorage('requests')}>
+      <Text style={styles.conversationName}>Requests →</Text>
+    </TouchableOpacity>
+  );
+}
+```
+
+#### Allow and denied actions
+
+Every time you open a conversation on the request tab you can show a popup with the allow and deny actions. You can use the `consentState` property of the conversation object to show the popup only when the consent state is `unknown`.
+
+```jsx
+// Inside your MessageContainer component
+const [showPopup, setShowPopup] = useState(
+  conversation.consentState === 'unknown',
+);
+
+// Function to handle the acceptance of a contact
+const handleAccept = async () => {
+  // Allow the contact
+  await client.contacts.allow([conversation.peerAddress]);
+  // Hide the popup
+  setShowPopup(false);
+  // Refresh the consent list
+  await client.contacts.refreshConsentList();
+  // Log the acceptance
+  console.log('accepted', conversation.peerAddress);
+};
+
+// Function to handle the blocking of a contact
+const handleBlock = async () => {
+  // Block the contact
+  await client.contacts.deny([conversation.peerAddress]);
+  // Hide the popup
+  setShowPopup(false);
+  // Refresh the consent list
+  await client.contacts.refreshConsentList();
+  // Log the blocking
+  console.log('denied', conversation.peerAddress);
+};
+```
+
+#### Conclusion
+
+By following these steps, you'll successfully integrate portable consent into your existing XMTP application. This enables users to have better control over who can send them messages, enhancing user privacy and experience.
+
+// Log the blocking
+console.log('denied', conversation.peerAddress);
+};
+
+````
+
+#### Conclusion
+
+By following these steps, you'll successfully integrate portable consent into your existing XMTP application. This enables users to have better control over who can send them messages, enhancing user privacy and experience.
+
 ## Troubleshooting
 
 **Resolving Buffer Issues with Ethers.js**
@@ -94,7 +200,7 @@ Ethers.js relies on the Buffer class, which is a global object in Node.js but no
 
    ```bash
    npm install buffer
-   ```
+````
 
 2. **Polyfill Buffer:**
 
