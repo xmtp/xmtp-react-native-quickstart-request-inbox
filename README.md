@@ -174,20 +174,6 @@ const handleBlock = async () => {
 };
 ```
 
-#### Conclusion
-
-By following these steps, you'll successfully integrate portable consent into your existing XMTP application. This enables users to have better control over who can send them messages, enhancing user privacy and experience.
-
-// Log the blocking
-console.log('denied', conversation.peerAddress);
-};
-
-````
-
-#### Conclusion
-
-By following these steps, you'll successfully integrate portable consent into your existing XMTP application. This enables users to have better control over who can send them messages, enhancing user privacy and experience.
-
 ## Troubleshooting
 
 **Resolving Buffer Issues with Ethers.js**
@@ -200,6 +186,8 @@ Ethers.js relies on the Buffer class, which is a global object in Node.js but no
 
    ```bash
    npm install buffer
+   ```
+
 ````
 
 2. **Polyfill Buffer:**
@@ -209,3 +197,4 @@ Ethers.js relies on the Buffer class, which is a global object in Node.js but no
    ```jsx
    global.Buffer = global.Buffer || require('buffer').Buffer;
    ```
+````
