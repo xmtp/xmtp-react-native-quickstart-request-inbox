@@ -12,9 +12,7 @@ Before diving into the code let's consider important aspects while integrating c
 - [Use consent preferences to respect user intent](https://xmtp.org/docs/build/user-consent#use-consent-preferences-to-respect-user-intent): Your app should aim to handle consent preferences appropriately because they are an expression of user intent.
 - [Synchronize user consent preferences](https://xmtp.org/docs/build/user-consent#synchronize-user-consent-preferences):All apps that use the user consent feature must adhere to the logic described in this section to keep the consent list on the network synchronized with local app user consent preferences, and vice versa.
 
-## Quickstart
-
-### Prerequisites
+## Prerequisites
 
 - Node.js
 - npm or Yarn
@@ -93,6 +91,8 @@ Finally, start your React Native application:
 ```bash
 npm run ios
 ```
+
+## Quickstart
 
 ### Initialize XMTP Client with Consent
 
