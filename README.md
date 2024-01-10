@@ -5,7 +5,6 @@ https://github.com/fabriguespe/xmtp-rn-request-inbox/assets/1447073/993606d8-517
 ### Prerequisites
 
 - Node.js
-
 - npm or Yarn
 - React Native CLI
 - Xcode (for iOS)
