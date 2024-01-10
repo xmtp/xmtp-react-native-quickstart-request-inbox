@@ -15,9 +15,11 @@ const styles = StyleSheet.create({
   popup: {
     width: '100%',
     backgroundColor: 'rgba(211, 211, 211, 0.3)', // lightgrey with transparency
+    padding: 10,
   },
   popupInner: {
     display: 'flex',
+    flexDirection: 'row',
     justifyContent: 'space-evenly',
     width: '100%',
   },
@@ -26,11 +28,9 @@ const styles = StyleSheet.create({
   },
   acceptButton: {
     backgroundColor: 'blue', // Blue background
-    color: 'white', // White text
   },
   blockButton: {
     backgroundColor: 'red', // Red background
-    color: 'white', // White text
   },
   popupTitle: {
     textAlign: 'center',
@@ -45,7 +45,7 @@ export const MessageContainer = ({
   const isFirstLoad = useRef(true);
   const {client} = useXmtp();
   const bottomOfList = useRef(null);
-  const [showPopup, setShowPopup] = useState('uknown');
+  const [showPopup, setShowPopup] = useState(null);
 
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -73,13 +73,12 @@ export const MessageContainer = ({
 
         //Consent state
         const consentState = await conversation.consentState();
-        console.log('consentState', consentState);
-        setShowPopup(consentState);
+        setShowPopup(consentState === 'unknown');
 
         let updatedMessages = [];
-        initialMessages.forEach(message => {
-          updatedMessages = updateMessages(updatedMessages, message);
-        });
+        for (const message of initialMessages) {
+          updatedMessages = await updateMessages(updatedMessages, message);
+        }
 
         setMessages(updatedMessages);
         setIsLoading(false);
@@ -190,6 +189,7 @@ export const MessageContainer = ({
                   title="Block"
                   style={{...styles.popupButton, ...styles.blockButton}}
                   onPress={handleBlock}
+                  color="red"
                 />
               </View>
             </View>
