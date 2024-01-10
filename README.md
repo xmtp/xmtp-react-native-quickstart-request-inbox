@@ -1,10 +1,12 @@
 # RN Example for IOS
 
-https://github.com/fabriguespe/xmtp-rn-request-inbox/blob/9aab1dbf32003674565c5b0915d567fef896f9ba
+https://github.com/fabriguespe/xmtp-rn-request-inbox/assets/1447073/993606d8-5170-4688-b5ec-36658862641a
 
 ### Prerequisites
 
 - Node.js
+
+
 - npm or Yarn
 - React Native CLI
 - Xcode (for iOS)
