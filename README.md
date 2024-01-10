@@ -1,11 +1,10 @@
-# RN Example for IOS
+# React Naative Request Inbox Quickstart
 
 https://github.com/fabriguespe/xmtp-rn-request-inbox/assets/1447073/993606d8-5170-4688-b5ec-36658862641a
 
 ### Prerequisites
 
 - Node.js
-
 
 - npm or Yarn
 - React Native CLI
