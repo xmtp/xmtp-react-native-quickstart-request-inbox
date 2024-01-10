@@ -1,6 +1,6 @@
 # RN Example for IOS
 
-[![Watch the video](link-to-thumbnail-image)](link-to-video)
+https://github.com/fabriguespe/xmtp-rn-request-inbox/blob/9aab1dbf32003674565c5b0915d567fef896f9ba/video.mp4
 
 ### Prerequisites
 
