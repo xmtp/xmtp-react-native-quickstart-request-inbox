@@ -102,7 +102,7 @@ Here's your existing `initXmtpWithKeys` function, updated to include the consent
 const initXmtpWithKeys = async function () {
   // ... previous code
   const xmtp = await Client.create(wallet);
-  // Add these lines to refresh the consent list
+  // Refresh the consent list to make sure your application is up-to-date with the network
   await xmtp.contacts.refreshConsentList();
 };
 ```
@@ -151,6 +151,20 @@ You can now create a separate inbox for requests. This inbox will only show the 
 }
 ```
 
+#### Refresh consent when opening a conversation
+
+To ensure that your application respects the latest user consent preferences, it's important to refresh the consent state every time a conversation is opened. This can be done by calling the `refreshConsentList` method of the XMTP client before any interaction within a conversation occurs.
+
+```jsx
+// Function to select and open a conversation
+const openConversation = async conversation => {
+  // Refresh the consent list to make sure your application is up-to-date with the network
+  await client.contacts.refreshConsentList();
+  // Now it's safe to open the conversation
+  setSelectedConversation(conversation);
+};
+```
+
 #### Allow and denied actions
 
 Every time you open a conversation on the request tab you can show a popup with the allow and deny actions. You can use the `consentState` property of the conversation object to show the popup only when the consent state is `unknown`.
@@ -163,6 +177,8 @@ const [showPopup, setShowPopup] = useState(
 
 // Function to handle the acceptance of a contact
 const handleAccept = async () => {
+  // Refresh the consent list first
+  await client.contacts.refreshConsentList();
   // Allow the contact
   await client.contacts.allow([conversation.peerAddress]);
   // Hide the popup
@@ -175,6 +191,8 @@ const handleAccept = async () => {
 
 // Function to handle the blocking of a contact
 const handleBlock = async () => {
+  // Refresh the consent list first
+  await client.contacts.refreshConsentList();
   // Block the contact
   await client.contacts.deny([conversation.peerAddress]);
   // Hide the popup

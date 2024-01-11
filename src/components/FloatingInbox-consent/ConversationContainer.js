@@ -86,7 +86,9 @@ export const ConversationContainer = ({
   const [createNew, setCreateNew] = useState(false);
 
   const selectConversation = async conversation => {
-    console.log('selectConversation', conversation.peerAddress);
+    // Refresh the consent list to make sure your application is up-to-date with the network
+    await client.contacts.refreshConsentList();
+    // Now it's safe to open the conversation
     setSelectedConversation(conversation);
   };
 
@@ -176,7 +178,7 @@ export const ConversationContainer = ({
           {loadingResolve && searchTerm && <Text>Resolving address...</Text>}
           <ListConversations
             searchTerm={searchTerm}
-            selectConversation={setSelectedConversation}
+            selectConversation={selectConversation}
             onConversationFound={state => {
               setConversationFound(state);
               if (state === true) setCreateNew(false);
