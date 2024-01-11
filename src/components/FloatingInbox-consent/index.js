@@ -4,7 +4,7 @@ import {ethers} from 'ethers';
 import {ConversationContainer} from './ConversationContainer';
 import {View, Text, Button, StyleSheet, TouchableOpacity} from 'react-native';
 import Config from 'react-native-config';
-console.log(Config);
+
 const myPrivateKey = Config.MY_PRIVATE_KEY;
 const infuraKey = Config.INFURA_KEY;
 import AsyncStorage from '@react-native-async-storage/async-storage';
