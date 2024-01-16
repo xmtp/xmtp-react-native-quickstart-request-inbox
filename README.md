@@ -4,6 +4,8 @@ Managing user consent is essential for enhancing privacy and the user experience
 
 If you already have an XMTP app, integrating portable consent features becomes crucial. This guide walks you through adding consent logic to your app.
 
+https://github.com/fabriguespe/xmtp-rn-request-inbox/assets/1447073/993606d8-5170-4688-b5ec-36658862641a
+
 ## Considerations
 
 Before diving into the code let's consider important aspects while integrating consent features. For example, before making an allow or block action you should synchronize the updated consent list in order to **prevent overwriting network** consent from another app. For more details head to these sections of our docs:
