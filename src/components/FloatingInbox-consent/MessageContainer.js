@@ -126,6 +126,11 @@ export const MessageContainer = ({
       return;
     }
     if (conversation && conversation.peerAddress) {
+      // Refresh the consent list to ensure it's up-to-date
+      await client.contacts.refreshConsentList();
+      // Update the consent state to "allowed"
+      await client.contacts.allow([conversation.peerAddress]);
+      // Send the message
       await conversation.send(newMessage);
     } else if (conversation) {
       const conv = await client.conversations.newConversation(searchTerm);
