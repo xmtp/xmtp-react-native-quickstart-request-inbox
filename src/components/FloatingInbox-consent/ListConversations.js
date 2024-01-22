@@ -129,12 +129,11 @@ export const ListConversations = ({searchTerm, selectConversation}) => {
         }),
       ).then(results => results.filter(Boolean));
 
+      //Block conversations are filtered out
       const requests = await Promise.all(
         filteredConversations.map(async conversation => {
           const consentState = await conversation.consentState();
-          return consentState === 'unknown' || consentState === 'denied'
-            ? conversation
-            : null;
+          return consentState === 'unknown' ? conversation : null;
         }),
       ).then(results => results.filter(Boolean));
 
