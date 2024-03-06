@@ -1,5 +1,7 @@
 # Add consent to an existing XMTP inbox
 
+![xmtp](https://github.com/xmtp/xmtp-quickstart-reactjs/assets/1447073/3f2979ec-4d13-4c3d-bf20-deab3b2ffaa1)
+
 Managing user consent is essential for enhancing privacy and the user experience. Providing user consent features in your app gives your users better control over who can send them messages.
 
 If you already have an XMTP app, integrating portable consent features becomes crucial. This guide walks you through adding consent logic to your app.
